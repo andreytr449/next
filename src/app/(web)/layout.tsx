@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@config/styles/globals.css";
 import localFont from "next/font/local";
-import { Header } from "@/app/widgets";
+import { Header, Footer } from "@/app/widgets";
 
 const uniqueFont = localFont({
   src: [
@@ -54,6 +54,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
