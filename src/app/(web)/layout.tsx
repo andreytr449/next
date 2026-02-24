@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@config/styles/globals.css";
 import localFont from "next/font/local";
+import { Header } from "@/app/widgets";
 
 const uniqueFont = localFont({
   src: [
@@ -51,6 +52,7 @@ export default function RootLayout({
       <body
         className={`${uniqueFont.variable} ${bicycletteFont.variable} font-bicyclette antialiased`}
       >
+        <Header />
         {children}
       </body>
     </html>
