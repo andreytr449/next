@@ -1,6 +1,7 @@
 import { Logo } from "@/app/shared/ui";
 import Link from "next/link";
 import { Button } from "@/app/shared/ui";
+import { UserMenu } from "./elements/user-menu.component";
 
 export const Header = () => {
   return (
@@ -9,9 +10,7 @@ export const Header = () => {
         <Logo />
         <span className="text-xl font-black">Spytay</span>
       </Link>
-      <Button className="bg-white text-black border-2 hover:text-background">
-        Create account
-      </Button>
+      <UserMenu />
     </header>
   );
 };
