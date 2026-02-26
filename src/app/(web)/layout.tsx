@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "@config/styles/globals.css";
 import localFont from "next/font/local";
 import { Header, Footer } from "@/app/widgets";
-import { Providers } from "@/app/shared/ui";
+import { Providers, Toaster } from "@/app/shared/ui";
 
 const uniqueFont = localFont({
   src: [
@@ -56,6 +56,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
+          <Toaster />
           <Footer />
         </Providers>
       </body>
