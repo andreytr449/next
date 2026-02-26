@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorText, Textarea } from "@/app/shared/ui";
@@ -8,17 +8,30 @@ import { questionType } from "./ask-question.interface";
 import { questionScheme } from "./ask-question.constant";
 import { createQuestion } from "@/app/entities/api/questions";
 import { toast } from "sonner";
+import { useQuestionDraftStore } from "@/app/shared/store/question-draft";
 
 export const AskQuestionForm = ({ userId }: { userId: string }) => {
+  const { draft, clearDraft, setDraft } = useQuestionDraftStore();
   const {
     register,
     handleSubmit,
+    reset,
+    getValues,
     setValue,
     formState: { errors },
   } = useForm<questionType>({
     resolver: yupResolver(questionScheme),
+    defaultValues: {
+      question: draft,
+    },
   });
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!getValues("question") && draft) {
+      setValue("question", draft);
+    }
+  }, [draft, setValue, getValues]);
 
   const onSubmit = async (data: questionType) => {
     setIsLoading(true);
@@ -28,10 +41,13 @@ export const AskQuestionForm = ({ userId }: { userId: string }) => {
       toast.error(res.error);
     } else {
       toast.success("Question successful sended");
-      setValue("question", "");
+      reset({ question: "" });
+      clearDraft();
     }
     setIsLoading(false);
   };
+
+  const questionField = register("question");
 
   return (
     <div className="flex flex-col justify-center bg-modal p-10 rounded-2xl items-center pt-4">
@@ -42,7 +58,14 @@ export const AskQuestionForm = ({ userId }: { userId: string }) => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col w-full max-w-md gap-4 px-4"
       >
-        <Textarea label="Question" {...register("question")} />
+        <Textarea
+          {...questionField}
+          onChange={(event) => {
+            questionField.onChange(event);
+            setDraft(event.target.value);
+          }}
+          label="Question"
+        />
         <ErrorText message={errors.question?.message} />
         <button
           type="submit"
