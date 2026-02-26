@@ -28,8 +28,7 @@ export const AuthModal = ({ open, onOpenChange }: AuthModalProps) => {
         <h1 className="text-accent text-9xl font-unique">
           {currentSection === "signUp" ? "Create account" : "Login"}
         </h1>
-        {currentSection === "signIn" && <LoginForm />}
-        {currentSection === "signUp" && <RegisterForm />}
+        {currentSection === "signIn" ? <LoginForm /> : <RegisterForm />}
         <div className="flex gap-1 py-2 ">
           <p className="text-white">
             {currentSection === "signUp"
