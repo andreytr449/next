@@ -1,4 +1,5 @@
 import { Profile, Questions, User } from "@/app/entities/api/user/";
+import { QuestionsList } from "@/app/features/qustions-list";
 import { ShareBanner } from "@/app/features/share-profile";
 import { UserProfile } from "@/app/shared/ui";
 
@@ -15,11 +16,13 @@ export const UserProfileModule = ({ profile, questions, user }: Props) => {
         <ShareBanner userId={user.id} />
         <UserProfile
           completedQuestions={1}
+          variant="full"
           createdAt={new Date(profile.created_at)}
           nickname={profile.username ? profile.username : user.email}
           totalQuestions={questions.length}
         />
       </div>
+      <QuestionsList questions={questions} />
     </main>
   );
 };
