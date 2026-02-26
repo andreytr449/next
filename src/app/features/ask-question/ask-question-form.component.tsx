@@ -6,26 +6,35 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorText, Textarea } from "@/app/shared/ui";
 import { questionType } from "./ask-question.interface";
 import { questionScheme } from "./ask-question.constant";
+import { createQuestion } from "@/app/entities/api/questions";
+import { toast } from "sonner";
 
-export const AskQuestionForm = () => {
+export const AskQuestionForm = ({ userId }: { userId: string }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<questionType>({
     resolver: yupResolver(questionScheme),
   });
-  const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (question: questionType) => {
+  const onSubmit = async (data: questionType) => {
     setIsLoading(true);
-    console.log(question);
+    const res = await createQuestion(userId, data.question);
+
+    if (!res.ok) {
+      toast.error(res.error);
+    } else {
+      toast.success("Question successful sended");
+      setValue("question", "");
+    }
     setIsLoading(false);
   };
 
   return (
-    <div className="flex flex-col justify-center items-center pt-4">
+    <div className="flex flex-col justify-center bg-modal p-10 rounded-2xl items-center pt-4">
       <h3 className="text-accent text-9xl font-unique">
         Type your question...
       </h3>

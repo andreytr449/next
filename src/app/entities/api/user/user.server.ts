@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@pkg/supabase/server";
-import { UserResponse } from "./user.interface";
+import { ProfileResponse, UserResponse } from "./user.interface";
 
 export async function getUser(): Promise<UserResponse> {
   const supabase = await createClient();
@@ -36,5 +36,24 @@ export async function getUser(): Promise<UserResponse> {
     user,
     profile,
     questions,
+  };
+}
+
+export async function getUserById(userId: string): Promise<ProfileResponse> {
+  const supabase = await createClient();
+
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", userId)
+    .single();
+
+  if (profileError) {
+    return { ok: false, error: profileError.message };
+  }
+
+  return {
+    ok: true,
+    profile,
   };
 }

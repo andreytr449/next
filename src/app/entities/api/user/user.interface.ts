@@ -37,4 +37,10 @@ export interface UserSuccessResponse {
   questions: Questions[];
 }
 
+export interface ProfileSuccessResponse {
+  ok: true;
+  profile: Profile;
+}
+
 export type UserResponse = UserSuccessResponse | UserErrorResponse;
+export type ProfileResponse = ProfileSuccessResponse | UserErrorResponse;
