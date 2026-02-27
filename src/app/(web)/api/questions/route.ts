@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@pkg/supabase/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const limit = 5;
   try {
     const supabase = await createClient();
+    const searchParams = request.nextUrl.searchParams;
+    const page = Number(searchParams.get("page")) || 1;
 
     const {
       data: { user },
@@ -20,14 +23,20 @@ export async function GET() {
       );
     }
 
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
+
     const {
       data: questions,
       error: questionsError,
+      count,
       status: questionStatus,
     } = await supabase
       .from("user_questions")
       .select("*")
-      .eq("user_id", user.id);
+      .eq("user_id", user.id)
+      .eq("is_completed", false)
+      .range(from, to);
 
     if (questionsError) {
       return NextResponse.json(
@@ -38,11 +47,13 @@ export async function GET() {
         { status: questionStatus },
       );
     }
+    const totalPages = count ? Math.ceil(count / limit) : 1;
 
     return NextResponse.json(
       {
         ok: true,
         questions,
+        totalPages,
       },
       { status: 200 },
     );

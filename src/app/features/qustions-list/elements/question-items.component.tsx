@@ -4,11 +4,15 @@ import * as motion from "motion/react-client";
 export const QuestionItem = ({
   question,
   index,
+  page,
 }: {
   question: Questions;
   index: number;
+  page: number;
 }) => {
   const { mutate: completedQuestions } = useCompleteQuestion();
+
+  const startIndex = (page - 1) * 5;
 
   return (
     <motion.div
@@ -27,7 +31,7 @@ export const QuestionItem = ({
       >
         Mark as answered
       </div>
-      <span className="font-bold text-gray-500">{index + 1}.</span>
+      <span className="font-bold text-gray-500">{index + startIndex + 1}.</span>
       <span className="text-gray-800">{question.question_text}</span>
     </motion.div>
   );

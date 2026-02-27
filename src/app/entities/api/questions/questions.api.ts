@@ -1,7 +1,9 @@
 import { Questions } from "./questions.interface";
 
-export async function getUserQuestions(): Promise<Questions[] | []> {
-  const response = await fetch("/api/questions", {
+export async function getUserQuestions(
+  page: number = 1,
+): Promise<Questions[] | []> {
+  const response = await fetch(`/api/questions?page=${page}&limit=5`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -9,7 +11,6 @@ export async function getUserQuestions(): Promise<Questions[] | []> {
   });
 
   const data = await response.json();
-  console.log(data);
   if (!response.ok) {
     throw new Error(data.message || "Failed to fetch user questions");
   }

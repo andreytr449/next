@@ -3,7 +3,10 @@
 import { createClient } from "@pkg/supabase/server";
 import { ProfileResponse, UserResponse } from "./user.interface";
 
-export async function getUser(): Promise<UserResponse> {
+export async function getUser(
+  page: number = 1,
+  limit: number = 5,
+): Promise<UserResponse> {
   const supabase = await createClient();
 
   const {
@@ -24,18 +27,31 @@ export async function getUser(): Promise<UserResponse> {
   if (profileError) {
     return { ok: false, error: profileError.message };
   }
-  const { data: questions, error: questionsError } = await supabase
+
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  const {
+    data: questions,
+    error: questionsError,
+    count,
+  } = await supabase
     .from("user_questions")
     .select("*")
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .eq("is_completed", false)
+    .range(from, to);
 
   if (questionsError) return { ok: false, error: questionsError.message };
+
+  const totalPages = count ? Math.ceil(count / limit) : 1;
 
   return {
     ok: true,
     user,
     profile,
     questions,
+    totalPages,
   };
 }
 
