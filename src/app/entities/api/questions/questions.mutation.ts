@@ -10,11 +10,11 @@ export const useCompleteQuestion = () => {
     mutationFn: (questionId: string) => completeQuestion(questionId),
     onMutate: async (questionId) => {
       await queryClient.cancelQueries({ queryKey: ["questions", "dashboard"] });
-
       const previousQuestions = queryClient.getQueryData([
         "questions",
         "dashboard",
       ]);
+
       queryClient.setQueryData(
         ["questions", "dashboard"],
         (oldQuestions: Questions[]) => {

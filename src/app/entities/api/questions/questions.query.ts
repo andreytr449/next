@@ -6,6 +6,5 @@ export const useGetQuestionsQuery = (initialData?: Questions[], page = 1) => {
   return useQuery<Questions[], Error>({
     queryKey: ["questions", "dashboard"],
     queryFn: () => getUserQuestions(page),
-    // initialData: initialData ?? [],
   });
 };

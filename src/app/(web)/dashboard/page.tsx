@@ -2,6 +2,12 @@ import { getUser } from "@/app/entities/api/user";
 import { UserProfileModule } from "@/app/modules/user-profile";
 import { redirect } from "next/navigation";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Your Dashboard | Manage Your Questions",
+};
+
 export default async function DashboardPage({
   searchParams,
 }: {
