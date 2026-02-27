@@ -18,6 +18,11 @@ export default async function DashboardPage({
   const { profile, user, totalPages } = response;
 
   return (
-    <UserProfileModule profile={profile} totalPages={totalPages} user={user} />
+    <UserProfileModule
+      currentPage={currentPage}
+      profile={profile}
+      totalPages={totalPages}
+      user={user}
+    />
   );
 }

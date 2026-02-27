@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
       status: questionStatus,
     } = await supabase
       .from("user_questions")
-      .select("*")
+      .select("*", { count: "exact" })
       .eq("user_id", user.id)
       .eq("is_completed", false)
       .range(from, to);

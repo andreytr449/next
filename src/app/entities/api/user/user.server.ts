@@ -37,7 +37,7 @@ export async function getUser(
     count,
   } = await supabase
     .from("user_questions")
-    .select("*")
+    .select("*", { count: "exact" })
     .eq("user_id", user.id)
     .eq("is_completed", false)
     .range(from, to);
