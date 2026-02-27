@@ -3,14 +3,12 @@ import Image from "next/image";
 export const UserProfile = ({
   nickname,
   totalQuestions,
-  completedQuestions,
   createdAt,
   variant = "full",
 }: {
   nickname: string;
   createdAt?: Date;
   totalQuestions?: number;
-  completedQuestions?: number;
   variant: "short" | "full";
 }) => {
   return (
@@ -31,17 +29,13 @@ export const UserProfile = ({
           </div>
           <div className="flex justify-between gap-5 items-center">
             <p className="text-gray items-start">Created at:</p>
-            <p className="">
+            {/* <p className="">
               {createdAt &&
                 createdAt.toLocaleDateString("en-EN", {
                   day: "numeric",
                   month: "long",
                 })}
-            </p>
-          </div>
-          <div className="flex justify-between gap-5 items-center">
-            <p className="text-gray">Answered questions:</p>
-            <p className="">{completedQuestions}</p>
+            </p> */}
           </div>
         </>
       ) : (

@@ -9,3 +9,4 @@ export { UserProfile } from "./user-profle";
 export { Toaster } from "./sonner";
 export * from "./textarea";
 export * from "./skeletons";
+export * from "./pagination";
