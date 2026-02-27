@@ -78,7 +78,6 @@ export async function PATCH(req: NextRequest) {
     }
 
     const body = await req.json();
-
     if (!body.questionId)
       return NextResponse.json(
         { ok: false, message: "Question id required." },

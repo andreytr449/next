@@ -31,13 +31,13 @@ export const UserProfile = ({
           </div>
           <div className="flex justify-between gap-5 items-center">
             <p className="text-gray items-start">Created at:</p>
-            <p className="">
+            {/* <p className="">
               {createdAt &&
                 createdAt.toLocaleDateString("en-EN", {
                   day: "numeric",
                   month: "long",
                 })}
-            </p>
+            </p> */}
           </div>
           <div className="flex justify-between gap-5 items-center">
             <p className="text-gray">Answered questions:</p>
