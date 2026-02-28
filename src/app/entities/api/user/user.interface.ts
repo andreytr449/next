@@ -35,6 +35,7 @@ export interface UserSuccessResponse {
   user: User;
   profile: Profile;
   questions: Questions[];
+  totalPages: number;
 }
 
 export interface ProfileSuccessResponse {

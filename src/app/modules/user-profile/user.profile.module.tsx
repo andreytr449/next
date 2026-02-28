@@ -1,28 +1,37 @@
-import { Profile, Questions, User } from "@/app/entities/api/user/";
-import { QuestionsList } from "@/app/features/qustions-list";
+import { Profile, User } from "@/app/entities/api/user/";
+import {
+  QuestionsList,
+  QuestionsPagination,
+} from "@/app/features/qustions-list";
 import { ShareBanner } from "@/app/features/share-profile";
 import { UserProfile } from "@/app/shared/ui";
 
 interface Props {
   user: User;
   profile: Profile;
-  questions: Questions[];
+  totalPages: number;
+  currentPage: number;
 }
 
-export const UserProfileModule = ({ profile, questions, user }: Props) => {
+export const UserProfileModule = ({
+  profile,
+  user,
+  totalPages,
+  currentPage,
+}: Props) => {
   return (
     <main className="flex flex-col items-center justify-center mx-52 my-10">
       <div className="flex items-center justify-between w-full">
         <ShareBanner userId={user.id} />
         <UserProfile
-          completedQuestions={1}
           variant="full"
           createdAt={new Date(profile.created_at)}
           nickname={profile.username ? profile.username : user.email}
-          totalQuestions={questions.length}
+          totalQuestions={totalPages * 5}
         />
       </div>
-      <QuestionsList questions={questions} />
+      <QuestionsList />
+      <QuestionsPagination currentPage={currentPage} totalPages={totalPages} />
     </main>
   );
 };
