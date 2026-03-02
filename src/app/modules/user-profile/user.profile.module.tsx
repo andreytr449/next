@@ -4,7 +4,7 @@ import {
   QuestionsPagination,
 } from "@/app/features/qustions-list";
 import { ShareBanner } from "@/app/features/share-profile";
-import { UserProfile } from "@/app/shared/ui";
+import { UserProfile } from "@/app/widgets/user-profile";
 
 interface Props {
   user: User;
@@ -27,7 +27,6 @@ export const UserProfileModule = ({
           variant="full"
           createdAt={new Date(profile.created_at)}
           nickname={profile.username ? profile.username : user.email}
-          totalQuestions={totalPages * 5}
         />
       </div>
       <QuestionsList />

@@ -1,0 +1,1 @@
+export {TotalQuestions} from "./total-questions.component"

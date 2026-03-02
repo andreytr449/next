@@ -54,6 +54,7 @@ export async function GET(request: NextRequest) {
         ok: true,
         questions,
         totalPages,
+        count
       },
       { status: 200 },
     );

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { completeQuestion } from "./questions.api";
-import { Questions } from "./questions.interface";
+import { Questions, QuestionsResponse } from "./questions.interface";
 import { toast } from "sonner";
 
 export const useCompleteQuestion = () => {
@@ -10,31 +10,33 @@ export const useCompleteQuestion = () => {
     mutationFn: (questionId: string) => completeQuestion(questionId),
     onMutate: async (questionId) => {
       await queryClient.cancelQueries({ queryKey: ["questions", "dashboard"] });
-      const previousQuestions = queryClient.getQueryData([
-        "questions",
-        "dashboard",
-      ]);
-
-      queryClient.setQueryData(
-        ["questions", "dashboard"],
-        (oldQuestions: Questions[]) => {
-          return oldQuestions.map((question: Questions) =>
-            question.id === questionId
-              ? { ...question, isCompleted: true }
-              : question,
-          );
-        },
-      );
-      return { previousQuestions };
+      const previousQuestions = queryClient.getQueriesData<QuestionsResponse>({queryKey: ["questions", "dashboard"]});
+    
+      queryClient.setQueriesData<QuestionsResponse>({
+        queryKey:['questions', 'dashboard']
+      },
+      (oldQuestions) => {
+        if(!oldQuestions) return undefined
+        return {
+                ...oldQuestions,
+                count: oldQuestions.count - 1,
+                questions: oldQuestions.questions.map((question: Questions) =>
+                  question.id === questionId
+                ? { ...question, isCompleted: true }
+                    : question,
+                )
+              }
+        })
+        
+        return {  previousQuestions };
     },
 
     onError: (err, questionId, context) => {
       toast.error(err.message);
       if (context?.previousQuestions) {
-        queryClient.setQueryData(
-          ["questions", "dashboard"],
-          context.previousQuestions,
-        );
+        context.previousQuestions.forEach(([queryKey, previousData]) => {
+          queryClient.setQueryData(queryKey, previousData);
+        });
       }
     },
     onSettled: () => {
