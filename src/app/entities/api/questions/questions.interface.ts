@@ -5,3 +5,10 @@ export interface Questions {
     completed_at: string;
     question_text: string;
   }
+
+  export interface QuestionsResponse {
+    ok:boolean
+    questions:Questions[]
+    totalPages:number
+    count:number
+  }

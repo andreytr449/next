@@ -1,8 +1,9 @@
+import { AuthLogout } from "@/app/features/auth-logout";
 import Image from "next/image";
+import { TotalQuestions } from "./elements";
 
 export const UserProfile = ({
   nickname,
-  totalQuestions,
   createdAt,
   variant = "full",
 }: {
@@ -23,20 +24,18 @@ export const UserProfile = ({
       {variant === "full" ? (
         <>
           <p className="text-2xl font-black">{nickname}</p>
-          <div className="flex justify-between gap-5 items-center">
-            <p className="text-gray items-start">Total Questions:</p>
-            <p className="">{totalQuestions}</p>
-          </div>
+         <TotalQuestions />
           <div className="flex justify-between gap-5 items-center">
             <p className="text-gray items-start">Created at:</p>
-            {/* <p className="">
+            <p className="">
               {createdAt &&
                 createdAt.toLocaleDateString("en-EN", {
                   day: "numeric",
                   month: "long",
                 })}
-            </p> */}
+            </p>
           </div>
+          <AuthLogout />
         </>
       ) : (
         <p className="text-2xl font-black">{nickname}</p>
