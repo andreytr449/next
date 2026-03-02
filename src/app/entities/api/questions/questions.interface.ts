@@ -4,6 +4,7 @@ export interface Questions {
     is_completed: boolean;
     completed_at: string;
     question_text: string;
+    created_at:string
   }
 
   export interface QuestionsResponse {

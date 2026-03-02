@@ -16,6 +16,15 @@ export const QuestionItem = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const { mutate: completedQuestions } = useCompleteQuestion();
+  const date = new Date(question.created_at);
+
+  const createdAt = new Intl.DateTimeFormat('en-UK', {
+    month: 'long',   
+    day: 'numeric',  
+    hour: '2-digit', 
+    minute: '2-digit'
+  }).format(date);
+
 
   const handleCompleteQuestion = () => {
     setIsLoading(true)
@@ -29,7 +38,7 @@ export const QuestionItem = ({
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.3 }}
       onClick={handleCompleteQuestion}
-      className={`${isLoading ? 'animate-pulse opacity-40' : ''} group relative flex items-start gap-3 cursor-pointer p-4 rounded-xl bg-gray-50 border border-gray-100 shadow-sm w-full`}
+      className={`${isLoading ? 'animate-pulse opacity-40' : ''} justify-between group relative flex items-start gap-3 cursor-pointer p-4 rounded-xl bg-gray-50 border border-gray-100 shadow-sm w-full`}
     >
       <div
         className="
@@ -41,8 +50,11 @@ export const QuestionItem = ({
       >
         Mark as answered
       </div>
-      <span className="font-bold text-gray-500">{index + startIndex + 1}.</span>
-      <span className="text-gray-800">{question.question_text}</span>
+      <div className="flex items-start gap-4">
+        <span className="font-bold text-gray-500">{index + startIndex + 1}.</span>
+        <span className="text-gray-800">{question.question_text}</span>
+      </div>
+      <span className="flex justify-end w-auto items-center text-gray">{createdAt}</span>
     </motion.div>
   );
 };

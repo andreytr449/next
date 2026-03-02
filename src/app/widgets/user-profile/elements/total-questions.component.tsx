@@ -4,7 +4,7 @@
 import { useGetQuestionsQuery } from "@/app/entities/api/questions"
 
 export const TotalQuestions = () => {
-    const {data:questions, isFetching} = useGetQuestionsQuery()
+    const {data:questions, isFetching} = useGetQuestionsQuery(1)
 
     const totalQuestions = questions?.count
 
