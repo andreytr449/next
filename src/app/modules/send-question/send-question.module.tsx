@@ -1,6 +1,6 @@
 import { Profile } from "@/app/entities/api/user";
 import { AskQuestionForm } from "@/app/features/ask-question";
-import { UserProfile } from "@/app/shared/ui";
+import { UserProfile } from "@/app/widgets/user-profile";
 
 export const SendQuestionModule = ({
   profile,

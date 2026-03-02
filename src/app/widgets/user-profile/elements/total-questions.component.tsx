@@ -1,3 +1,6 @@
+"use client"
+
+
 import { useGetQuestionsQuery } from "@/app/entities/api/questions"
 
 export const TotalQuestions = () => {

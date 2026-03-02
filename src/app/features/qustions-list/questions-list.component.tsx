@@ -8,10 +8,9 @@ import { QuestionsListSkeleton } from "@/app/shared/ui";
 export const QuestionsList = () => {
   const searchParams = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
-  const { data: response, isLoading } = useGetQuestionsQuery([], page);
+  const { data: response, isLoading } = useGetQuestionsQuery(page);
 
   const questions = response?.questions || []
-
   if(!isLoading && (!questions || questions?.length === 0)) return <h2 className="mt-28 flex items-center justify-center w-full text-3xl">No questions yet.</h2>
 
   return (

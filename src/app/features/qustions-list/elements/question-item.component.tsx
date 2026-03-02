@@ -1,5 +1,9 @@
+"use client"
+
+
 import { Questions, useCompleteQuestion } from "@/app/entities/api/questions/";
 import * as motion from "motion/react-client";
+import { useState } from "react";
 
 export const QuestionItem = ({
   question,
@@ -10,7 +14,13 @@ export const QuestionItem = ({
   index: number;
   page: number;
 }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const { mutate: completedQuestions } = useCompleteQuestion();
+
+  const handleCompleteQuestion = () => {
+    setIsLoading(true)
+    completedQuestions(question.id)
+  }
 
   const startIndex = (page - 1) * 5;
 
@@ -18,8 +28,8 @@ export const QuestionItem = ({
     <motion.div
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.3 }}
-      onClick={() => completedQuestions(question.id)}
-      className="group relative flex items-start gap-3 cursor-pointer p-4 rounded-xl bg-gray-50 border border-gray-100 shadow-sm w-full"
+      onClick={handleCompleteQuestion}
+      className={`${isLoading ? 'animate-pulse opacity-40' : ''} group relative flex items-start gap-3 cursor-pointer p-4 rounded-xl bg-gray-50 border border-gray-100 shadow-sm w-full`}
     >
       <div
         className="
