@@ -1,8 +1,8 @@
-import { Questions } from "./questions.interface";
+import { QuestionsResponse } from "./questions.interface";
 
 export async function getUserQuestions(
   page: number = 1,
-): Promise<Questions[] | []> {
+): Promise<QuestionsResponse> {
   const response = await fetch(`/api/questions?page=${page}&limit=5`, {
     method: "GET",
     headers: {
@@ -15,7 +15,7 @@ export async function getUserQuestions(
     throw new Error(data.message || "Failed to fetch user questions");
   }
 
-  return data.questions;
+  return data;
 }
 
 export async function completeQuestion(questionId: string) {

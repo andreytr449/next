@@ -1,0 +1,1 @@
+export {AuthLogout} from "./auth-logout.component"
