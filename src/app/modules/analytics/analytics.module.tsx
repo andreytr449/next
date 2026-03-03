@@ -14,7 +14,17 @@ interface AnalyticsModuleProps {
 }
 
 export const AnalyticsModule = ({ questions }: AnalyticsModuleProps) => {
-  const { answered, avgPerDay, thisWeek, total, months } = calculateQuestions(questions);
+  const {
+    answered,
+    avgPerDay,
+    thisWeek,
+    total,
+    months,
+    mostQuestionsDay,
+    longestQuestion,
+    streak,
+  } = calculateQuestions(questions);
+
   return (
     <main className="relative flex flex-col justify-center items-center gap-3 w-full">
       <h1 className="text-primary font-unique text-[160px] mt-5">Your Stats</h1>
@@ -36,10 +46,9 @@ export const AnalyticsModule = ({ questions }: AnalyticsModuleProps) => {
           height={150}
         />
         <InsightsBlocks
-          answered={answered}
-          avgPerDay={avgPerDay}
-          thisWeek={thisWeek}
-          total={total}
+          bestDay={mostQuestionsDay}
+          longestQuestion={longestQuestion}
+          streak={streak}
         />
       </div>
       <span className="absolute top-21 -left-1">

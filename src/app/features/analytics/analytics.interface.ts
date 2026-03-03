@@ -4,9 +4,26 @@ export interface QuestionsStats {
   thisWeek: number;
   avgPerDay: string;
   months: MonthActivity[];
+  mostQuestionsDay: BestDay;
+  streak: QuestionsStreak;
+  longestQuestion: LongestQuestion;
 }
 
 export interface MonthActivity {
   month: string;
   desktop: number;
+}
+
+export interface BestDay {
+  count: number;
+  date: string;
+}
+
+export interface QuestionsStreak {
+  days: number;
+  range: string;
+}
+export interface LongestQuestion {
+  chars: number;
+  date: string;
 }

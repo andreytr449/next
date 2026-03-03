@@ -1,14 +1,14 @@
+import { BestDay, QuestionsStreak, LongestQuestion } from './analytics.interface';
 import { Block } from './elements';
 
 export const InsightsBlocks = ({
-  answered,
-  thisWeek,
-  total,
+  bestDay,
+  streak,
+  longestQuestion,
 }: {
-  answered: number;
-  avgPerDay: string;
-  thisWeek: number;
-  total: number;
+  bestDay: BestDay;
+  streak: QuestionsStreak;
+  longestQuestion: LongestQuestion;
 }) => {
   return (
     <section className="flex flex-wrap gap-15 items-center justify-between my-10">
@@ -16,22 +16,22 @@ export const InsightsBlocks = ({
         className="px-16 py-5"
         iconUrl="/Trophy.png"
         title="Best Day Record"
-        value={total}
-        additionalText="Asked on 27 feb"
+        value={bestDay.count}
+        additionalText={bestDay.date}
       />
       <Block
         className="px-16 py-5"
         iconUrl="/Fire.png"
         title="Longest Streak"
-        value={answered}
-        additionalText="Asked on 27 feb"
+        value={streak.days}
+        additionalText={streak.range}
       />
       <Block
         className="px-16 py-5"
         iconUrl="/Writing Hand.png"
         title="Longest Question"
-        value={thisWeek}
-        additionalText="Asked on 27 feb"
+        value={longestQuestion.chars}
+        additionalText={longestQuestion.date}
       />
     </section>
   );
