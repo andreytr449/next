@@ -34,7 +34,7 @@ export const UserActivityChart = ({ chartData }: { chartData: MonthActivity[] })
         <CardDescription>January - December 2026</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full">
+        <ChartContainer config={chartConfig} className="h-[250px] w-full">
           <LineChart
             accessibilityLayer
             data={chartData}
