@@ -12,19 +12,12 @@ import {
   ChartTooltip,
   CardFooter,
   ChartTooltipContent,
-  type ChartConfig,
   CardTitle,
 } from '@/app/shared/ui';
 import { MonthActivity } from './analytics.interface';
+import { userActivityChartConfig } from './analytics.constant';
 
 export const description = 'An interactive line chart';
-
-const chartConfig = {
-  desktop: {
-    label: 'Questions',
-    color: 'var(--chart-1)',
-  },
-} satisfies ChartConfig;
 
 export const UserActivityChart = ({ chartData }: { chartData: MonthActivity[] }) => {
   return (
@@ -34,7 +27,7 @@ export const UserActivityChart = ({ chartData }: { chartData: MonthActivity[] })
         <CardDescription>January - December 2026</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[250px] w-full">
+        <ChartContainer config={userActivityChartConfig} className="h-[250px] w-full">
           <LineChart
             accessibilityLayer
             data={chartData}

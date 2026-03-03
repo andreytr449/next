@@ -2,7 +2,7 @@ import { type ChartConfig } from '@/app/shared/ui';
 
 export const questionsStatusConfig = {
   visitors: {
-    label: 'Visitors',
+    label: 'Questions',
   },
   chrome: {
     label: 'Chrome',
@@ -23,5 +23,12 @@ export const questionsStatusConfig = {
   other: {
     label: 'Other',
     color: 'var(--chart-5)',
+  },
+} satisfies ChartConfig;
+
+export const userActivityChartConfig = {
+  desktop: {
+    label: 'Questions',
+    color: 'var(--chart-1)',
   },
 } satisfies ChartConfig;

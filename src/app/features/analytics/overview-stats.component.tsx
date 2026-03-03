@@ -1,6 +1,6 @@
 import { Block } from './elements';
 
-export const Blocks = ({
+export const OverviewStats = ({
   answered,
   avgPerDay,
   thisWeek,
