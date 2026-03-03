@@ -1,6 +1,5 @@
 import { Questions } from '@/app/entities/api/questions';
-import { QuestionsStats, MonthActivity } from './analytics.interface';
-import { count } from 'console';
+import { QuestionsStats, MonthActivity, DayActivity } from './analytics.interface';
 
 const MONTHS = [
   'January',
@@ -116,6 +115,35 @@ export const getLongestQuestion = (questions: Questions[]) => {
   };
 };
 
+export const getWeekComparison = (questions: Questions[]): DayActivity[] => {
+  const now = new Date();
+
+  const thisWeekStart = new Date();
+  thisWeekStart.setDate(now.getDate() - 6);
+
+  const lastWeekStart = new Date();
+  lastWeekStart.setDate(now.getDate() - 13);
+
+  const generateDays = (startDate: Date) =>
+    Array.from({ length: 7 }, (_, i) => {
+      const date = new Date(startDate);
+      date.setDate(startDate.getDate() + i);
+      return date.toISOString().split('T')[0];
+    });
+
+  const thisWeekDays = generateDays(thisWeekStart);
+  const lastWeekDays = generateDays(lastWeekStart);
+
+  const countForDay = (day: string) =>
+    questions.filter((q) => q.created_at.split('T')[0] === day).length;
+
+  return thisWeekDays.map((day, i) => ({
+    day: new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(new Date(day)),
+    current: countForDay(day),
+    prev: countForDay(lastWeekDays[i]),
+  }));
+};
+
 export const calculateQuestions = (questions: Questions[]): QuestionsStats => {
   const total = questions.length;
   const answered = questions.filter((question) => question.is_completed).length;
@@ -131,7 +159,7 @@ export const calculateQuestions = (questions: Questions[]): QuestionsStats => {
   const mostQuestionsDay = getBestDay(questions);
   const streak = getLongestStreak(questions);
   const longestQuestion = getLongestQuestion(questions);
-
+  const weekComparison = getWeekComparison(questions);
   return {
     total,
     answered,
@@ -141,5 +169,6 @@ export const calculateQuestions = (questions: Questions[]): QuestionsStats => {
     mostQuestionsDay,
     streak,
     longestQuestion,
+    weekComparison,
   };
 };

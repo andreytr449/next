@@ -7,6 +7,7 @@ export interface QuestionsStats {
   mostQuestionsDay: BestDay;
   streak: QuestionsStreak;
   longestQuestion: LongestQuestion;
+  weekComparison: DayActivity[];
 }
 
 export interface MonthActivity {
@@ -26,4 +27,10 @@ export interface QuestionsStreak {
 export interface LongestQuestion {
   chars: number;
   date: string;
+}
+
+export interface DayActivity {
+  day: string;
+  current: number;
+  prev: number;
 }

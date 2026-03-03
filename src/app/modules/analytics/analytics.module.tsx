@@ -5,6 +5,7 @@ import {
   QuestionsStatusChart,
   UserActivityChart,
   InsightsBlocks,
+  WeekComparisonChart,
 } from '@/app/features/analytics';
 import { HeroArm } from '@/app/shared/ui';
 import Image from 'next/image';
@@ -23,6 +24,7 @@ export const AnalyticsModule = ({ questions }: AnalyticsModuleProps) => {
     mostQuestionsDay,
     longestQuestion,
     streak,
+    weekComparison,
   } = calculateQuestions(questions);
 
   return (
@@ -51,6 +53,7 @@ export const AnalyticsModule = ({ questions }: AnalyticsModuleProps) => {
           streak={streak}
         />
       </div>
+      <WeekComparisonChart chartData={weekComparison} />
       <span className="absolute top-21 -left-1">
         <HeroArm />
       </span>

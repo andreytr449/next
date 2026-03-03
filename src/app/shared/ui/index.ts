@@ -11,3 +11,4 @@ export * from './skeletons';
 export * from './pagination';
 export * from './card';
 export * from './chart';
+export * from './select';
