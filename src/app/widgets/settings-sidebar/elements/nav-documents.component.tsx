@@ -1,15 +1,13 @@
 'use client';
 
-import { IconDots, IconFolder, IconShare3, IconTrash, type Icon } from '@tabler/icons-react';
+import { type Icon } from '@tabler/icons-react';
 
 import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from '@/app/shared/ui';
 
 export function NavDocuments({
@@ -21,8 +19,6 @@ export function NavDocuments({
     icon: Icon;
   }[];
 }) {
-  const { isMobile } = useSidebar();
-
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Documents</SidebarGroupLabel>
@@ -35,30 +31,8 @@ export function NavDocuments({
                 <span>{item.name}</span>
               </a>
             </SidebarMenuButton>
-            <SidebarMenuAction showOnHover className="rounded-sm data-[state=open]:bg-accent">
-              <IconDots />
-              <span className="sr-only">More</span>
-            </SidebarMenuAction>
-            <SidebarMenuAction showOnHover className="rounded-sm data-[state=open]:bg-accent">
-              <IconDots />
-              <span className="sr-only">More</span>
-            </SidebarMenuAction>
-            <SidebarMenuAction showOnHover className="rounded-sm data-[state=open]:bg-accent">
-              <IconDots />
-              <span className="sr-only">More</span>
-            </SidebarMenuAction>
-            <SidebarMenuAction showOnHover className="rounded-sm data-[state=open]:bg-accent">
-              <IconDots />
-              <span className="sr-only">More</span>
-            </SidebarMenuAction>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <IconDots className="text-sidebar-foreground/70" />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   );
