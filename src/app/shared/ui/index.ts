@@ -14,3 +14,8 @@ export * from './chart';
 export * from './select';
 export { ProfileSettingsLink } from './profile-settings-link';
 export { UserCard } from './user-card';
+export * from './separator';
+export * from './sheet';
+export * from './sidebar';
+export * from './skeleton';
+export * from './tooltip';
