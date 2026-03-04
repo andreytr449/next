@@ -12,3 +12,5 @@ export * from './pagination';
 export * from './card';
 export * from './chart';
 export * from './select';
+export { ProfileSettingsLink } from './profile-settings-link';
+export { UserCard } from './user-card';

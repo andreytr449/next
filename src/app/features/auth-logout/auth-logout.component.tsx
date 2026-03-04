@@ -19,7 +19,7 @@ export const AuthLogout = () => {
 
   return (
     <Button
-      className={`${isLoading ? 'animate-pulse' : ''} text-xl bg-white text-black`}
+      className={`${isLoading ? 'animate-pulse' : ''} text-xl bg-white text-black w-full `}
       onClick={handleClick}
     >
       {isLoading ? 'Loading...' : 'Log out'}

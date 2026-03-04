@@ -54,7 +54,7 @@ export const AnalyticsModule = ({ questions }: AnalyticsModuleProps) => {
         />
       </div>
       <WeekComparisonChart chartData={weekComparison} />
-      <span className="absolute top-21 -left-1">
+      <span className="absolute top-21 -left-1 z-30">
         <HeroArm />
       </span>
     </main>
